@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://c6gs77ojxv65o"]
+
+[ext_resource type="Script" uid="uid://c36jp35w8w8lv" path="res://scripts/bird.gd" id="1_twsrt"]
+[ext_resource type="Texture2D" uid="uid://cpprhxn07rqbs" path="res://sprites/bird_red_0.png" id="2_b7mtg"]
+[ext_resource type="Texture2D" uid="uid://brtwv30uw6s6o" path="res://sprites/bird_red_1.png" id="3_bdh3x"]
+[ext_resource type="Texture2D" uid="uid://dkqpncarh7w5f" path="res://sprites/bird_red_2.png" id="4_jggmu"]
+[ext_resource type="AudioStream" uid="uid://cd6ueny2r2hk0" path="res://audio/sfx_hit.wav" id="5_b7mtg"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hrcfq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_b7mtg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_bdh3x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_jggmu")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ehebh"]
+size = Vector2(33, 26)
+
+[node name="bird" type="RigidBody2D"]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_twsrt")
+metadata/_edit_group_ = true
+
+[node name="anim_sprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_hrcfq")
+animation = &"fly"
+frame_progress = 0.06666033
+
+[node name="shape" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -1)
+shape = SubResource("RectangleShape2D_ehebh")
+
+[node name="sfx_hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_b7mtg")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
