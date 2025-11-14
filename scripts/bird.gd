@@ -46,6 +46,10 @@ func set_state(new_state):
 		state = FlyingState.new(self)
 	elif new_state == STATE_FLAPPING:
 		state = FlappingState.new(self)
+	elif new_state == STATE_HIT:
+		state = HitState.new(self)
+	elif new_state == STATE_GROUNDED:
+		state = GroundedState.new(self)
 	
 	state_changed.emit()
 	pass
@@ -55,7 +59,6 @@ func get_state():
 		return STATE_FLYING
 	elif state is FlappingState:
 		return STATE_FLAPPING
-
 
 	
 	pass # Replace with function body.
@@ -149,7 +152,7 @@ class HitState:
 	func _init(bird):
 		self.bird = bird
 		bird.set_linear_velocity(Vector2(0,0))
-		bird.set_angular_speed(2)
+		bird.set_angular_velocity(2)
 		# keep the same gravity scale as in flapping state
 		var other_body = bird.get_colliding_bodies()[0]
 		bird.add_collision_exception_with(other_body)

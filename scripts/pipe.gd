@@ -15,15 +15,17 @@ extends Node2D
 @export var GAP_MAX = 250
 @export var GAP_MIN = 50
 @export var speed = -15
-
+@export var coin_scene: PackedScene
 signal pipe_exit
 
 var original_pipe_height
 var bottom_pipe_height
 var top_pipe_height
 
-func _ready():
+# add scoring area
 
+func _ready():
+	var right_x = get_viewport_rect().size.x-30
 	bottom_pipe.add_to_group(game.GROUP_PIPES)
 	top_pipe.add_to_group(game.GROUP_PIPES)
 	
@@ -32,15 +34,14 @@ func _ready():
 	var offset = generateGap(offset_max,offset_min,10)
 	set_up_pipe(gap,offset)
 	
-
 	visibility.screen_exited.connect(_on_pipe_invisible)
 	bottom_pipe.position.x = 0
 	top_pipe.position.x = 0
-	position.x = 160
 
 
 func init(_spawn_x:float):
 	position.x = _spawn_x
+	position.y = 0 # Reset Y position to top of screen
 	
 func set_up_pipe(gap_size,offset):
 
@@ -72,20 +73,24 @@ func set_up_pipe(gap_size,offset):
 	print("GAP: ",gap_size)
 	print("HEIGHTS: ",top_pipe_height," ",bottom_pipe_height)
 	print("COLLISION: ",top_collision.extents.y*2, " ",bottom_collision.extents.y*2)
+	
+	
 func generateGap(max_gap,min_gap,gap):
 	var steps = int((max_gap-min_gap)/gap)
 	var rand_int = randi_range(0,steps)
 	var gap_size = min_gap + gap*rand_int
 	return gap_size
 
+func set_coin():
+	var random_value = randf()
+	if random_value> 0.5:
+		var coin = coin_scene.instantiate()
+		add_child(coin)
+		
 func _process(delta):
 	position.x += speed*delta
-	#print("TOP HEIGHT: ",top_pipe_height," TOP SHAPE: ",top_shape.shape.extents.y*2)
-	#print("BOTTOM HEIGHT: ",bottom_pipe_height," BOTTOM SHAPE: ",bottom_shape.shape.extents.y*2)
-	#bottom_pipe.position.x += speed*delta
-	#top_pipe.position.x += speed*delta
-	#print("PIPE POSITION: ",position.x," COLLISION POSITION: ",bottom_shape.global_position.x)
-	
+
+
 
 func _on_pipe_invisible():
 	print("PIPE EXITED!")

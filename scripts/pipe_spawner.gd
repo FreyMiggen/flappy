@@ -6,11 +6,12 @@ func _ready() -> void:
 	# initiate 2 pipes
 	var x_size = get_viewport_rect().size.x
 	for x_cor in [x_size/4,x_size*3/4]:
-		print("PIPE ADDED!")
+		print("PIPE ADDED AT X: ",x_cor)
 		var pipe = pipe_scene.instantiate()
 		pipe.init(x_cor)
 		pipe.pipe_exit.connect(_on_pipe_exited)
 		add_child(pipe)
+		print("PIPE ADDED, POSITION: ", pipe.position)
 	
 
 func _process(delta):
