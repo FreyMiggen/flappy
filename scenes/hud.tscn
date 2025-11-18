@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://wve2rdfndtx0"]
+
+[ext_resource type="Script" uid="uid://b42xfu2q2pgvh" path="res://scripts/hud.gd" id="1_oo0fn"]
+[ext_resource type="FontFile" uid="uid://bhfvmkt1xjoc" path="res://fonts/Xolonium-Regular.ttf" id="2_5ysmq"]
+[ext_resource type="Texture2D" uid="uid://ce38npd73rpo7" path="res://sprites/button_play_normal.png" id="3_5ysmq"]
+[ext_resource type="Texture2D" uid="uid://c38pr5g54kkae" path="res://sprites/button_play_pressed.png" id="3_6fi6k"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_oo0fn")
+normal_icon = ExtResource("3_5ysmq")
+pressed_icon = ExtResource("3_6fi6k")
+
+[node name="ScoreLabel" type="Label" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -26.0
+offset_bottom = 44.0
+grow_horizontal = 0
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_5ysmq")
+theme_override_font_sizes/font_size = 36
+text = "0"
+
+[node name="StartButton" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_icons/icon = ExtResource("3_5ysmq")

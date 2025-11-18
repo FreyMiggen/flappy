@@ -2,9 +2,15 @@ extends Area2D
 
 enum CoinType {BRONZE, SILVER, GOLD}
 
-@export var bronze_texture:Texture2D
-@export var silver_texture:Texture2D
-@export var gold_texture:Texture2D
+#@export var bronze_texture:Texture2D
+#@export var silver_texture:Texture2D
+#@export var gold_texture:Texture2D
+
+@export var coin_size:float= 22.0
+
+@onready var bronze_texture: Texture2D = preload("res://sprites/medal_bronze.png")
+@onready var silver_texture: Texture2D = preload("res://sprites/medal_silver.png")
+@onready var gold_texture: Texture2D = preload("res://sprites/medal_gold.png")
 
 @onready var sprite = $sprite
 @onready var shape:CollisionShape2D = $shape
@@ -18,10 +24,17 @@ var score_values ={
 	CoinType.SILVER:5,
 	CoinType.GOLD: 10
 }
+
 func _ready() -> void:
+	print(get_size())
 	setup_random_type()
-	position.x = 100
-	position.y = 100
+	# SETUP POSITION FOR TESTING
+	#position.x = 100
+	#position.y = 100
+	#print(coin_type)
+	print(get_score())
+	
+	
 	body_entered.connect(_on_body_entered)
 	pass # Replace with function body.
 
@@ -43,6 +56,9 @@ func setup_random_type():
 			sprite.texture = silver_texture
 		CoinType.GOLD:
 			sprite.texture = gold_texture
+	
+	sprite.set_deferred("texture",sprite.texture)
+	print(sprite.texture)
 
 func set_collision_shape():
 	var texture_size = Vector2(16,16)
@@ -51,6 +67,9 @@ func set_collision_shape():
 
 func get_score()->int:
 	return score_values[coin_type]
+
+func get_size():
+	return sprite.get_texture().get_height()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

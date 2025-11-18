@@ -67,7 +67,7 @@ class FlyingState:
 	var bird
 	var prev_gravity_scale
 	func _init(bird):
-		self.bird = bird
+		self.bird = bird 
 		#bird.get_node("anim").play("fly")
 		bird.get_node("anim_sprite").play("fly")
 		prev_gravity_scale = bird.get_gravity_scale()
