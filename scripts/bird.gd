@@ -139,9 +139,7 @@ class FlappingState:
 		# flying upward
 		bird.set_linear_velocity(Vector2(0, -175))
 		bird.set_angular_velocity(-3)
-		#print("flap")
-		#print(bird.position)
-		#bird.get_node("anim").play("flap")
+
 		pass
 	
 	func exit():

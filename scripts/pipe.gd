@@ -71,46 +71,6 @@ func set_up_pipe(gap_size,offset):
 	# COINS
 	set_up_coins(gap_size,offset)
 	
-	
-#func set_up_pipe(gap_size,offset):
-#
-	#var center_y = get_viewport_rect().size.y/2
-	#var right_x = get_viewport_rect().size.x-30
-	#
-	#
-	#var top_gap = gap_size/2 + offset
-	#var bottom_gap = gap_size - top_gap
-	#
-	## height
-	#top_pipe_height = center_y-top_gap
-	#bottom_pipe_height = center_y-bottom_gap
-	#
-	##scale sprite
-	#top_sprite.scale.y = top_pipe_height/original_pipe_height
-	#bottom_sprite.scale.y = bottom_pipe_height/original_pipe_height
-	#
-	## collision
-	#var top_collision:RectangleShape2D = top_shape.shape as RectangleShape2D
-	#top_collision.extents.y = top_pipe_height/2
-	#var bottom_collision:RectangleShape2D = bottom_shape.shape as RectangleShape2D
-	#bottom_collision.extents.y = bottom_pipe_height/2
-	#
-	## postion y
-	#top_pipe.position.y = top_pipe_height/2
-	#bottom_pipe.position.y = center_y+bottom_gap+bottom_pipe_height/2
-	##print("TOP PIPE: ",top_pipe.position.y," BOTTOM PIPE: ",bottom_pipe.position.y)
-	##print("GAP: ",gap_size)
-	#print("HEIGHTS: ",top_pipe_height," ",bottom_pipe_height)
-	#print("OFFSET: ",offset)
-	##print("COLLISION: ",top_collision.extents.y*2, " ",bottom_collision.extents.y*2)
-	#
-	## SETUP COIN
-	##var coin = coin_scene.instantiate()
-	##await coin.ready # wait for _ready to complete
-	##var coin_size = coin.get_size()
-	#
-	#set_up_coins(gap_size,offset)
-
 
 func set_up_coins(gap_size,offset):
 	var coin = coin_scene.instantiate()
@@ -145,6 +105,7 @@ func set_up_coins(gap_size,offset):
 
 func _on_coin_collected(score_value:int):
 	print("SCORE GAINED: ",score_value)
+	
 	pass
 				
 func generateGap(max_gap,min_gap,gap):

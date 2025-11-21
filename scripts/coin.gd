@@ -84,5 +84,8 @@ func _on_body_entered(body: Node2D) -> void:
 
 func collect_coin():
 	shape.set_deferred("disabled",true)
+	
+	# Use staitc wrapper
+	GameManager.add_score(get_score())
 	queue_free()
 	
